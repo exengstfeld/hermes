@@ -1,0 +1,245 @@
+# GENERAL CONFIGURATIONS
+PORT=4500
+APPLICATION="EIMEO"
+#KNOWN_STATICS=[".woff",".map",".ttf",".ico",".gif",".png",".js",".html",".css"]
+HTML_FOLDER="/home/b996031/moorea/sources/moorea_workbench/html/"
+STANDALONE_HTML_FORBIDDEN="src/views/errors/standalones/forbidden.html"
+STANDALONE_HTML_GENERIC="src/views/errors/standalones/error_generic.html"
+TOKEN_ATTR_CN="nombre"
+TOKEN_ATTR_ORGANIZATION_ID="oficina"
+MAIL_ATTR="email"
+FIXED_ORGANIZATION_ID="TEST"
+EMPLOYEE_EXTRA_DATA_ENABLED=True
+EMPLOYEE_EXTRA_DATA_METHOD="get_employee_office"
+SECURE_SERVICES_PATH="security/token/create"
+SECURE_SERVICES_ENABLED=True
+INITIAL_CONFIGURATION_ENABLED=True
+INITIAL_CONFIG_PATH="config"
+DEV_MODE=False
+DEV_MODE_USER={"one_shoot":False, "uid":"dev_mode", "email":"dev_user@moorea.io", "organization_id": "test", "roles":["Administrador"], "cn":"dev_mode"}
+DEV_MODE_TOKEN={"token":"UN_TOKEN", "sign":"UN_SIGN", "ACTION":"un_action"}
+WILDCARD="*"
+
+# SERVER SOAP CONFIGURATION
+#WSDL='http://formwebws.anses.gov.ar/soap/retrieve?wsdl'
+#WSDL="http://ansesarg.anses.gov.ar:4501/soap/retrieve?wsdl"
+LOGIN_URL="http://labprueba3/garquitectura/aplicaciones/formdigi.aspx"
+LOCATION="http://ansesarqdir01.anses.gov.ar:81/DirectorSOA/director.svc/soap11/retrieve"
+#LOCATION="http://formwebws.anses.gov.ar/soap/retrieve"
+ACTION="http://formwebws.anses.gov.ar/"
+NAMESPACE="http://formwebws.anses.gov.ar"
+CREDENTIALS_XMLNS="http://director.anses.gov.ar"
+EXCEPTIONS=True
+SOAP_NS='soapenv'
+TRACE=True
+NS="ans"
+PROXY={}
+
+# ROLES MATRIX SERVICE DATA
+ANSES_ROLES_MATRIX_WSDL="http://ansesarqdir01.anses.gov.ar:81/DirectorSOA/GrantForSystemGroup.svc?wsdl"
+#ANSES_ROLES_MATRIX_WSDL="http://ansesarqdir01.anses.gov.ar:8023/DirectorSOA/GrantForSystemGroup.svc?wsdl"
+ANSES_ROLES_MATRIX_EXCEPTIONS=True
+ANSES_ROLES_MATRIX_SOAP_NS="soapenv"
+ANSES_ROLES_MATRIX_TRACE=True
+ANSES_ROLES_MATRIX_NS="ans"
+ANSES_ROLES_MATRIX_PROXY={}
+ANSES_ROLES_MATRIX_PARSER=lambda matrix: [menu["DTOServicioAction"]["accion"] for menu in matrix]
+
+# SECURITY CONFIGURATION
+ANSES_TOKEN_VALIDATIONS_ENABLED = True
+VALIDATION_SIGN_CERT_PATH="/home/b996031/moorea/instance_config/cert_anses.crt"
+VALIDATION_SIGN_MSG="La firma no es valida"
+VALIDATION_IP_MSG="Su IP no esta habilitada para utilizar la aplicacion"
+VALIDATION_EXPIRATION_MSG="Su token ha expirado"
+
+
+# SERVICES MAPPING
+SERVICES=[{
+             'pattern':'config/as_array',
+             'method':'GET',
+             'soap_method':'GetConfigAsArray'
+},{
+             'pattern':'api/thesauri/validate',
+             'method':'POST',
+             'soap_method':'ApiThesauriValidate'
+},{
+             'pattern':'api/catalog/export_all',
+             'method':'GET',
+             'soap_method':'ApiCatalogExportAllGet'
+},{
+             'pattern':'api/thesauri',
+             'method':'POST',
+             'soap_method':'ApiThesauriCreate'
+},{
+             'pattern':'api/catalog/import_csv',
+             'method':'POST',
+             'soap_method':'ApiCatalogImportCsv'
+},{
+             'pattern':'api/catalog/remove',
+             'method':'PUT',
+             'soap_method':'ApiCatalogRemovePut'
+},{
+             'pattern':'api/catalog/csv/*',
+             'method':'GET',
+             'soap_method':'ApiCatalogCsvGet'
+},{
+             'pattern':'api/catalog/save_catalog',
+             'method':'PUT',
+             'soap_method':'ApiCatalogSaveCatalog'
+},{
+             'pattern':'api/thesauri/update/forms/*',
+             'method':'POST',
+             'soap_method':'ApiThesauriUpdateFormsPost'
+},{
+             'pattern':'api/spec/export/*',
+             'method':'GET',
+             'soap_method':'ApiSpecExportSomething'
+},{
+             'pattern':'api/users/addThesaurus',
+             'method':'POST',
+             'soap_method':'ApiUsersAddThesaurus'
+},{
+             'pattern':'api/catalog/service/remove',
+             'method':'POST',
+             'soap_method':'ApiCatalogServiceRemove'
+},{
+             'pattern':'api/catalog/set_new_value',
+             'method':'POST',
+             'soap_method':'ApiCatalogSetNewValue'
+},{
+             'pattern':'api/catalog/*',
+             'method':'POST',
+             'soap_method':'ApiCatalogPost'
+},{
+             'pattern':'api/spec/clon',
+             'method':'POST',
+             'soap_method':'ApiSpecClone'
+},{
+             'pattern':'api/spec/import',
+             'method':'POST',
+             'soap_method':'ApiSpecImport'
+},{
+             'pattern':'api/spec/edit',
+             'method':'POST',
+             'soap_method':'ApiSpecEdit'
+},{
+             'pattern':'api/catalog/*/select',
+             'method':'POST',
+             'soap_method':'ApiCatalogSomethingSelect'
+},{
+             'pattern':'api/forms/combo/get_all/select',
+             'method':'POST',
+             'soap_method':'ApiFormsComboGetAllSelect'
+},{
+             'pattern':'api/spec/remove',
+             'method':'PUT',
+             'soap_method':'ApiSpecRemove'
+},{
+             'pattern':'api/spec/*',
+             'method':'PUT',
+             'soap_method':'ApiSpecPut'
+},{
+             'pattern':'api/spec/*',
+             'method':'GET',
+             'soap_method':'ApiSpecGet'
+}, {
+             'pattern':'api/spec',
+             'method':'POST',
+             'soap_method':'ApiSpec'
+}, {
+             'pattern':'api/spec/get_all',
+             'method':'GET',
+             'soap_method':'ApiSpecGetAll'
+}, {
+             'pattern':'security/rxf/matrix',
+             'method':'GET',
+             'soap_method':'SecurityRxfMatrix'
+}, {
+             'pattern':'security/user/get_roles',
+             'method':'GET',
+             'soap_method':'SecurityUserGetRoles'
+}, {
+             'pattern':'api/catalog/get_all',
+             'method':'GET',
+             'soap_method':'GetCatalog'
+}, {
+             'pattern':'api/users/*',
+             'method':'GET',           
+             'soap_method':'GetUser'
+}, {
+             'pattern':'api/users',
+             'method':'POST',
+             'soap_method':'CreateUser'
+}, {
+             'pattern':'api/forms/bulkload/*',
+             'method':'GET',          
+             'soap_method':'GetBulkload'
+}, {
+             'pattern':'api/thesauri/*',
+             'method':'GET',             
+             'soap_method':'GetTesauro'
+}, {
+             'pattern':'api/thesauri/*',
+             'method':'PUT',
+             'soap_method':'PutTesauro'
+}, {
+             'pattern':'api/thesauri/addForm/*',
+             'method':'POST',         
+             'soap_method':'AddFormToTesauro'
+}, {
+             'pattern':'api/catalog/combo/get_all/select',
+             'method':'POST',           
+             'soap_method':'ApiCatalogComboGetAllSelect'
+}, {
+             'pattern':'api/thesauri/update/*',
+             'method':'POST',           
+             'soap_method':'UpdateTesauroHeader'
+}, {
+             'pattern':'api/users/addForm',
+             'method':'POST',
+             'soap_method':'AddFormToUser'
+}, {
+             'pattern':'api/forms/bulkload/*',
+             'method':'POST',           
+             'soap_method':'PostBulkload'
+}, {
+             'pattern':'api/forms/getAll',
+             'method':'POST',           
+             'soap_method':'GetAllForms'
+}, {
+             'pattern':'api/forms/validate',
+             'method':'POST',             
+             'soap_method':'ValidateForm'
+}, {
+             'pattern':'api/forms/header/*',
+             'method':'PUT',            
+             'soap_method':'UpdateFormHeader'
+}, {
+             'pattern':'api/forms',
+             'method':'POST',       
+             'soap_method':'CreateForm'
+}, {
+             'pattern':'api/forms/payload/*',
+             'method':'PUT',         
+             'soap_method':'UpdateFormPayload'
+}, {
+             'pattern':'api/forms/*',
+             'method':'GET',
+             'soap_method':'GetForm'
+}, {
+             'pattern':'anses/get_employee_office',
+             'method':'POST',            
+             'soap_method':'get_employee_office'
+}, {
+             'pattern':'anses/get_person_by_cuip',
+             'method':'POST',
+             'soap_method':'get_person_by_cuip'
+},{
+             'pattern':'api/users/*/all',
+             'method':'GET',            
+             'soap_method':'GetUserAll'
+}, {
+             'pattern':'anses/get_office_children',
+             'method':'POST',
+             'soap_method':'get_office_children'
+}]

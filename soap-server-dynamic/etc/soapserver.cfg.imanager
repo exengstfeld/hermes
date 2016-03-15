@@ -1,0 +1,182 @@
+# Keys that will be inserted on template. Strings must have double quotes ("'example'") the others just one. 
+NAMESPACE="'http://bandejatramitesws.anses.gov.ar'"
+SERVICE_LOCATION="'/soap/retrieve'"
+VALIDATOR="None"
+
+SERVICES=[{
+        "function":"GetConfig",
+        "location":"'http://localhost:5000/'"
+},{
+        "function":"WfInstancePost",
+        "location":"'http://localhost:5000/'"
+},{
+	"function":"ApiCatalogSelectPost",
+        "location":"'http://localhost:5000/'"
+},{
+        "function":"RuleEngineDomainComboDataTypes",
+        "location":"'http://localhost:5000/'"
+},{
+        "function":"ApiCatalogGetAll",
+        "location":"'http://localhost:5000/'"
+},{
+        "function":"ApiFormsGetAll",
+        "location":"'http://localhost:5000/'"
+},{
+        "function":"ApiFormsGet",
+        "location":"'http://localhost:5000/'"
+},{
+        "function":"ApiCatalogImportPost",
+        "location":"'http://localhost:5000/'"
+},{
+        "function":"ApiCatalogImportAll",
+        "location":"'http://localhost:5000/'"
+},{
+        "function":"ApiFormsImportAll",
+        "location":"'http://localhost:5000/'"
+},{
+        "function":"ApiFormsGetBycode",
+        "location":"'http://localhost:5000/'"
+},{
+        "function":"ValEventsGet",
+        "location":"'http://localhost:5000/'"
+},{
+        "function":"ServiceValidatorPut",
+        "location":"'http://localhost:5000/'"
+},{
+        "function":"ServiceValidatorGet",
+        "location":"'http://localhost:5000/'"
+},{
+        "function":"FsRawBucketPost",
+        "location":"'http://localhost:5000/'"
+},{
+        "function":"WfSpecGet",
+        "location":"'http://localhost:5000/'"
+},{
+        "function":"WfInstanceExecuteTask",
+        "location":"'http://localhost:5000/'"
+},{
+        "function":"WfInstanceGetById",
+        "location":"'http://localhost:5000/'"
+},{
+        "function":"WrapperForm2Pdf",
+        "location":"'http://localhost:5000/'"
+},{
+        "function":"SubOrgDataPost",
+        "location":"'http://localhost:5000/'"
+},{
+        "function":"ServiceValidatorPluginDelete",
+        "location":"'http://localhost:5000/'"
+},{
+        "function":"ServiceValidatorGetAll",
+        "location":"'http://localhost:5000/'"
+},{
+        "function":"RuleEngineTriggerGetAll",
+        "location":"'http://localhost:5000/'"
+},{
+        "function":"ServiceValidatorPluginsImportAll",
+        "location":"'http://localhost:5000/'"
+},{
+        "function":"RuleEngineDomain",
+        "location":"'http://localhost:5000/'"
+},{
+        "function":"ServiceValidatorPost",
+        "location":"'http://localhost:5000/'"
+},{
+        "function":"ServiceValidatorUpdatePost",
+        "location":"'http://localhost:5000/'"
+},{
+        "function":"ServiceValidatorPluginsExport",
+        "location":"'http://localhost:5000/'"
+},{
+        "function":"RuleEngineRuleSpecGet",
+        "location":"'http://localhost:5000/'"
+},{
+        "function":"RuleEngineScenarioGetAll",
+        "location":"'http://localhost:5000/'"
+},{
+        "function":"RuleEngineStaticList",
+        "location":"'http://localhost:5000/'"
+},{
+        "function":"GetConfigPost",
+        "location":"'http://localhost:5000/'"
+},{
+        "function":"PublicPluginExecute",
+        "location":"'http://localhost:5000/'"
+},{
+        "function":"SubOrgDataGet",
+        "location":"'http://localhost:5000/'"
+},{
+        "function":"WfInstancesTemplatesComboGetAllSelectPost",
+        "location":"'http://localhost:5000/'"
+},{
+        "function":"CreateSessionToken",
+        "location":"'http://localhost:5000/'"
+},{                
+        "location":"'http://localhost:5000/'",
+        'function':'GetConfigAsArray'
+},{                
+        "location":"'http://localhost:5000/'",
+        'function':'SecurityRxfMatrix'
+},{                
+        "location":"'http://localhost:5000/'",
+        'function':'SecurityUserGetRoles'
+},{                
+        "location":"'http://localhost:5000/'",
+        'function':'WfInstanceGet'
+},{                
+        "location":"'http://localhost:5000/'",
+        'function':'DevWfInstanceGet'
+},{
+        "location":"'http://localhost:5000/'",
+        'function':'WfSpecGetAll'
+},{
+        "location":"'http://localhost:5000/'",
+        'function':'ApiFormsImportPost'
+},{
+        "location":"'http://localhost:5000/'",
+        'function':'WfSpecImportPost'
+},{
+        "location":"'http://localhost:5000/'",
+        'function':'ValEventsPost'
+}]
+
+# App configuration
+PORT=4510
+
+EXTERNAL_SERVICES=[
+        {
+                "function":"get_office_children",
+                "namespace":"'http://bandejatramites.anses.gov.ar'",
+                "wsdl":"'http://ansesnegodesapp/BUSS/Anses.BUSS.EmpleadosUnidadOrganica.Servicio/EmpleadoUnidadOrganicaWS.asmx?wsdl'",
+                "soap_ns":"'soapenv'",
+                "trace":"True",
+                "ns":"''",
+                "exceptions":"True",
+                "soap_attributes":"codigoUnidad=data.get('codigo_unidad')",
+                "soap_method":"obtenerUnidadesOrganicasDependientesDirectas",
+                "response_parser":"lambda response: response.obtenerUnidadesOrganicasDependientesDirectasResult"
+        },{
+                "function":"get_employee_office",
+                "namespace":"'http://bandejatramites.anses.gov.ar'",
+                "wsdl":"'http://ansesnegodesapp/BUSS/Anses.BUSS.EmpleadosUnidadOrganica.Servicio/EmpleadoUnidadOrganicaWS.asmx?wsdl'",
+                "soap_ns":"'soapenv'",
+                "trace":"True",
+                "ns":"''",
+                "exceptions":"True",
+                "soap_attributes":"legajo=data.get('legajo')",
+                "soap_method":"obtenerEmpleadoLegajo",
+                "response_parser":"lambda response: (response != None and response.get('obtenerEmpleadoLegajoResult') != None and {'txt_nombre':response.get('obtenerEmpleadoLegajoResult')['Apellido'] + " " + response.get('obtenerEmpleadoLegajoResult')['Nombre'], 'txt_cuil':response.get('obtenerEmpleadoLegajoResult')['Cuil'], 'mail_correo':response.get('obtenerEmpleadoLegajoResult')['Email'], 'txt_telefono':response.get('obtenerEmpleadoLegajoResult')['Interno'], 'txt_domicilio':response.get('obtenerEmpleadoLegajoResult')['DireccionCTrabajo'], 'txt_localidad':response.get('obtenerEmpleadoLegajoResult')['Poblacion']}) or {}"
+        },
+        {
+                "function":"get_person_by_cuip",
+                "namespace":"'http://bandejatramites.anses.gov.ar'",
+                "wsdl":"'http://ansesdesapp/adplocalizaciondb2/DatosdePersonaporCuip.asmx?WSDL'",
+                "soap_ns":"'soapenv'",
+                "trace":"True",
+                "ns":"''",
+                "exceptions":"True",
+                "soap_attributes":"Cuip=data.get('cuip')",
+                "soap_method":"ObtenerPersonaxCUIP",
+                "response_parser":"lambda response: (response != None and response.get('ObtenerPersonaxCUIPResult') != None and {'txt_apellido_nombre':response['ObtenerPersonaxCUIPResult']['PersonaCuip']['ape_nom'], 'date_fecha_nacimiento':str(response['ObtenerPersonaxCUIPResult']['PersonaCuip']['f_naci'])}) or {}"
+        }
+]

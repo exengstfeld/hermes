@@ -1,0 +1,254 @@
+# GENERAL CONFIGURATIONS
+PORT=4500
+APPLICATION="IMANAGER"
+#KNOWN_STATICS=[".woff",".map",".ttf",".ico",".gif",".png",".js",".html",".css"]
+HTML_FOLDER="/home/b996031/moorea/sources/moorea_imanager/html/"
+STANDALONE_HTML_FORBIDDEN="src/views/errors/standalones/forbidden.html"
+STANDALONE_HTML_GENERIC="src/views/errors/standalones/error_generic.html"
+TOKEN_ATTR_CN="nombre"
+TOKEN_ATTR_ORGANIZATION_ID="oficina"
+MAIL_ATTR="email"
+FIXED_ORGANIZATION_ID="TEST"
+EMPLOYEE_EXTRA_DATA_ENABLED=False
+EMPLOYEE_EXTRA_DATA_METHOD="get_employee_office"
+SECURE_SERVICES_PATH="security/token/create"
+SECURE_SERVICES_ENABLED=True
+INITIAL_CONFIGURATION_ENABLED=True
+INITIAL_CONFIG_PATH="config"
+DEV_MODE=False
+DEV_MODE_USER={"one_shoot":False, "uid":"dev_mode", "email":"dev_user@moorea.io", "organization_id": "test", "roles":["Administrador"], "cn":"dev_mode"}
+DEV_MODE_TOKEN={"token":"UN_TOKEN", "sign":"UN_SIGN", "ACTION":"un_action"}
+WILDCARD="*"
+
+# SERVER SOAP CONFIGURATION
+#WSDL='http://argws.anses.gov.ar/soap/retrieve?wsdl'
+#WSDL="http://ansesarg.anses.gov.ar:4501/soap/retrieve?wsdl"
+LOGIN_URL="http://labprueba3/garquitectura/aplicaciones/bandeja.aspx"
+LOCATION="http://ansesarqdir01.anses.gov.ar:81/DirectorSOA/director.svc/soap11/retrieve"
+#LOCATION="http://argws.anses.gov.ar/soap/retrieve"
+ACTION="http://bandejatramitesws.anses.gov.ar/"
+NAMESPACE="http://bandejatramitesws.anses.gov.ar"
+CREDENTIALS_XMLNS="http://director.anses.gov.ar"
+EXCEPTIONS=True
+SOAP_NS='soapenv'
+TRACE=True
+NS="ans"
+PROXY={}
+
+# ROLES MATRIX SERVICE DATA
+ANSES_ROLES_MATRIX_WSDL="http://ansesarqdir01.anses.gov.ar:81/DirectorSOA/GrantForSystemGroup.svc?wsdl"
+#ANSES_ROLES_MATRIX_WSDL="http://ansesarqdir01.anses.gov.ar:8023/DirectorSOA/GrantForSystemGroup.svc?wsdl"
+ANSES_ROLES_MATRIX_EXCEPTIONS=True
+ANSES_ROLES_MATRIX_SOAP_NS="soapenv"
+ANSES_ROLES_MATRIX_TRACE=True
+ANSES_ROLES_MATRIX_NS="ans"
+ANSES_ROLES_MATRIX_PROXY={}
+ANSES_ROLES_MATRIX_PARSER=lambda matrix: [menu["DTOServicioAction"]["accion"] for menu in matrix]
+
+# SECURITY CONFIGURATION
+ANSES_TOKEN_VALIDATIONS_ENABLED = True
+VALIDATION_SIGN_CERT_PATH="/home/b996031/moorea/instance_config/cert_anses.crt"
+VALIDATION_SIGN_MSG="La firma no es valida"
+VALIDATION_IP_MSG="Su IP no esta habilitada para utilizar la aplicacion"
+VALIDATION_EXPIRATION_MSG="Su token ha expirado"
+
+
+# SERVICES MAPPING
+SERVICES=[{
+             'pattern':'config/as_array',
+             'method':'GET',
+             'soap_method':'GetConfigAsArray'
+}, {
+             'pattern':'rule_engine/static_list',
+             'method':'GET',
+             'soap_method':'RuleEngineStaticList'
+},{
+             'pattern':'api/forms/import',
+             'method':'POST',
+             'soap_method':'ApiFormsImportPost'
+}, {
+             'pattern':'rule_engine/trigger/get_all',
+             'method':'GET',
+             'soap_method':'RuleEngineTriggerGetAll'
+}, {
+             'pattern':'rule_engine/scenario/getAll',
+             'method':'GET',
+             'soap_method':'RuleEngineScenarioGetAll'
+}, {
+             'pattern':'rule_engine/rule_spec',
+             'method':'GET',
+             'soap_method':'RuleEngineRuleSpecGet'
+}, {
+             'pattern':'service_validator',
+             'method':'POST',
+             'soap_method':'ServiceValidatorPost'
+}, {
+             'pattern':'service_validator',
+             'method':'PUT',
+             'soap_method':'ServiceValidatorPut'
+}, {
+             'pattern':'rule_engine/combo/*/select',
+             'method':'POST',
+             'soap_method':'RuleEngineDomainComboDataTypes'
+}, {
+             'pattern':'api/catalog/get_all',
+             'method':'GET',
+             'soap_method':'ApiCatalogGetAll'
+}, {
+             'pattern':'api/forms/get_all',
+             'method':'GET',
+             'soap_method':'ApiFormsGetAll'
+}, {
+             'pattern':'api/forms/bycode/*',
+             'method':'GET',
+             'soap_method':'ApiFormsGetBycode'
+}, {
+             'pattern':'api/catalog/import',
+             'method':'POST',
+             'soap_method':'ApiCatalogImportPost'
+}, {
+             'pattern':'api/catalog/import_all',
+             'method':'POST',
+             'soap_method':'ApiCatalogImportAll'
+}, {
+             'pattern':'api/forms/import_all',
+             'method':'POST',
+             'soap_method':'ApiFormsImportAll'
+}, {
+             'pattern':'rule_engine/domain',
+             'method':'GET',
+             'soap_method':'RuleEngineDomain'
+}, {
+             'pattern':'service_validator/plugins/import/ALL',
+             'method':'POST',
+             'soap_method':'ServiceValidatorPluginsImportAll'
+}, {
+             'pattern':'service_validator/plugins/export/*',
+             'method':'GET',
+             'soap_method':'ServiceValidatorPluginsExport'
+}, {
+
+             'pattern':'wf/instances/templates/combo/get_all/select',
+             'method':'POST',
+             'soap_method':'WfInstancesTemplatesComboGetAllSelectPost'
+}, {
+             'pattern':'service_validator/get_all',
+             'method':'GET',
+             'soap_method':'ServiceValidatorGetAll'
+}, {
+             'pattern':'val/events',
+             'method':'GET',
+             'soap_method':'ValEventsGet'
+}, {
+             'pattern':'service_validator/plugin/*/delete',
+             'method':'POST',
+             'soap_method':'ServiceValidatorPluginDelete'
+},{
+             'pattern':'service_validator/update',
+             'method':'POST',
+             'soap_method':'ServiceValidatorUpdatePost'
+},{
+             'pattern':'service_validator/*',
+             'method':'GET',
+             'soap_method':'ServiceValidatorGet'
+}, {
+             'pattern':'sub_org/data',
+             'method':'POST',
+             'soap_method':'SubOrgDataPost'
+}, {
+             'pattern':'sub_org/data',
+             'method':'GET',
+             'soap_method':'SubOrgDataGet'
+}, {
+             'pattern':'config',
+             'method':'GET',
+             'soap_method':'GetConfig'
+}, {
+             'pattern':'public/plugin/execute',
+             'method':'POST',
+             'soap_method':'PublicPluginExecute'
+}, {
+             'pattern':'config',
+             'method':'POST',
+             'soap_method':'GetConfigPost'
+}, {
+             'pattern':'security/rxf/matrix',
+             'method':'GET',
+             'soap_method':'SecurityRxfMatrix'
+}, {
+             'pattern':'security/user/get_roles',
+             'method':'GET',
+             'soap_method':'SecurityUserGetRoles'
+}, {
+             'pattern':'wf/instance/get',
+             'method':'GET',
+             'soap_method':'WfInstanceGet'
+}, {
+             'pattern':'api/catalog/*/select',
+             'method':'POST',
+             'soap_method':'ApiCatalogSelectPost'
+}, {
+             'pattern':'wf/instance',
+             'method':'POST',
+             'soap_method':'WfInstancePost'
+}, {
+             'pattern':'wf/instance/by_id/*',
+             'method':'GET',
+             'soap_method':'WfInstanceGetById'
+}, {
+             'pattern':'wrapper/form2pdf',
+             'method':'POST',
+             'soap_method':'WrapperForm2Pdf'
+}, {
+             'pattern':'wf/instance/*/execute_task/*',
+             'method':'POST',
+             'soap_method':'WfInstanceExecuteTask'
+}, {
+             'pattern':'wf/spec/*',
+             'method':'GET',
+             'soap_method':'WfSpecGet'
+}, {
+             'pattern':'fs/raw/bucket',
+             'method':'POST',
+             'soap_method':'FsRawBucketPost'
+}, {
+             'pattern':'wf/instance/get',
+             'method':'POST',
+             'soap_method':'WfInstanceGet'
+}, {
+             'pattern':'dev/wf/instance/get',
+             'method':'GET',
+             'soap_method':'DevWfInstanceGet'
+}, {
+             'pattern':'dev/wf/instance/get',
+             'method':'POST',
+             'soap_method':'DevWfInstanceGet'
+}, {
+             'pattern':'wf/spec/get_all',
+             'method':'GET',
+             'soap_method':'WfSpecGetAll'
+}, {
+             'pattern':'wf/spec/import',
+             'method':'POST',
+             'soap_method':'WfSpecImportPost'
+},{
+             'pattern':'api/forms/*',
+             'method':'GET',
+             'soap_method':'ApiFormsGet'
+}, {
+             'pattern':'val/events',
+             'method':'POST',
+             'soap_method':'ValEventsPost'
+}, {
+             'pattern':'anses/get_employee_office',
+             'method':'POST',
+             'soap_method':'get_employee_office'
+},{
+             'pattern':'anses/get_person_by_cuip',
+             'method':'POST',
+             'soap_method':'get_person_by_cuip'
+}, {
+             'pattern':'anses/get_office_children',
+             'method':'POST',
+             'soap_method':'get_office_children'
+}]
