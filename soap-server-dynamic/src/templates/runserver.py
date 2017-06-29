@@ -7,24 +7,20 @@ class MethodsExpose(spyne.Service):
 	{% for service in services %}
 	@spyne.srpc(Unicode,Unicode,Unicode,Unicode,Unicode,Unicode,_returns=Unicode)
 	def {{service.function}}(url_pattern, content_type, web_method, params, raw, location):
-		#try:
-			h = http.Http(disable_ssl_certificate_validation=True)
-			url = {{service.location}} + url_pattern
-			app.logger.debug("Called URL "+ url)
-			app.logger.debug("Params ")
-			app.logger.debug( json.loads(params))
+		h = http.Http(disable_ssl_certificate_validation=True)
+		url = {{service.location}} + url_pattern
+		app.logger.debug("Called URL "+ url)
+		app.logger.debug("Params ")
+		app.logger.debug( json.loads(params))
 
 
-			data = b64decode(raw)
-			if ((params is not None) and (json.loads(params).get("Content-Type") is not None) and ("json" in json.loads(params).get("Content-Type"))): 
+		data = b64decode(raw)
+		if ((params is not None) and (json.loads(params).get("Content-Type") is not None) and ("json" in json.loads(params).get("Content-Type"))): 
 				data=json.loads(data)
-			app.logger.debug(data)
-			response, content = h.request(url, web_method.strip(), data, headers=json.loads(params))			
-			app.logger.debug("Response is "+ str(response)+ " and content is "+ str(content))
-			return content
-		#except Exception,ex:
-		#	app.logger.exception(ex)
-		#	return { "success": False, "data":str(ex), "msg":"Ha ocurrido un error en el servidor SOAP" }
+		app.logger.debug(data)
+		response, content = h.request(url, web_method.strip(), data, headers=json.loads(params))			
+		app.logger.debug("Response is "+ str(response)+ " and content is "+ str(content))
+		return content
 	{% endfor %}
 	
 	{% for external_service in external_services %}
@@ -38,8 +34,6 @@ class MethodsExpose(spyne.Service):
 		parse = {{external_service.response_parser}}
 		return dumps(parse(response))
 	{% endfor %}
-
-#obtenerEmpleadoLegajo legajo=data.get("legajo")
 
 	@spyne.srpc(_returns=Unicode)
 	def isalive():
