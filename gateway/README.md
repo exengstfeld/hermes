@@ -149,7 +149,7 @@ SERVICES=[{
              'method':'GET',
              'soap_method':'Alive',
 }]
-</pre>
+~~~~~~
 
 Finalmente podremos correr nuestra aplicación exportando primero la variable de ambiente indicando la configuración a utilizar y luego ejecutando el componente:
 <pre>
