@@ -1,14 +1,6 @@
 #!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
-# -*- coding: utf-8 -*-
-#!/usr/bin/python
-# -*- coding: ascii -*-
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#!/usr/bin/python
 # -*- coding: latin-1 -*-
-#!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
+
 
 '''
 SOAP Client
@@ -24,9 +16,6 @@ from bson.json_util import dumps
 import json
 import sys
 from base64 import b64encode
-
-reload(sys)
-sys.setdefaultencoding("utf-8")
 
 class CommunicationException(Exception):
 	_message=""
